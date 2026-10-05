@@ -22,6 +22,10 @@ public class VoiceChatInteractionCommand implements CommandExecutor {
                 if (args[0].equals("toggle")) {
                     if (args.length >= 2 && player.hasPermission("voicechat_interaction.toggle.others")) {
                         Player other = Bukkit.getPlayer(args[1]);
+                        if (other == null) {
+                            player.sendMessage("Player " + args[1] + " is not online");
+                            return true;
+                        }
                         plugin.setInteractionToggle(other, !plugin.getInteractionToggle(other));
                         player.sendMessage("Interactions toggled to " + plugin.getInteractionToggle(other) + " for " + other.getName());
                         other.sendMessage(player.getName() + " toggled your interactions to " + plugin.getInteractionToggle(other));

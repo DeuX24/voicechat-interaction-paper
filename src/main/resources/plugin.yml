@@ -1,15 +1,24 @@
 name: voicechat_interaction
-version: $version
+version: '$version'
 main: dev.igalaxy.voicechatinteraction.VoiceChatInteraction
-api-version: "$apiVersion"
+api-version: '26.2'
 prefix: voicechat_interaction
 authors: [ "henkelmax", "iGalaxy" ]
 description: $description
-website: https://github.com/iGalaxyYT/voicechat-interaction-paper
+website: https://github.com/DeuX24/voicechat-interaction-paper
 depend: [ voicechat ]
 commands:
   voicechat_interaction:
     description: "Manage Voice Chat Interaction settings"
     usage: "/voicechat_interaction toggle [<player>]"
-    aliases: [voicechat_interaction]
     permission: voicechat_interaction
+permissions:
+  voicechat_interaction:
+    description: Use /voicechat_interaction.
+    default: true
+  voicechat_interaction.toggle:
+    description: Toggle voice chat interaction for yourself.
+    default: true
+  voicechat_interaction.toggle.others:
+    description: Toggle voice chat interaction for other players.
+    default: op

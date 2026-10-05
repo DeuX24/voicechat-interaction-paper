@@ -2,29 +2,28 @@ package dev.igalaxy.voicechatinteraction;
 
 import de.maxhenkel.voicechat.api.BukkitVoicechatService;
 import dev.igalaxy.voicechatinteraction.config.ServerConfig;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.bukkit.GameEvent;
 import org.bukkit.Server;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import javax.annotation.Nullable;
+import java.util.logging.Logger;
 
 public final class VoiceChatInteraction extends JavaPlugin {
 
     public static final String PLUGIN_ID = "voicechat_interaction";
-    public static final Logger LOGGER = LogManager.getLogger(PLUGIN_ID);
+    public static Logger LOGGER;
     public static ServerConfig SERVER_CONFIG;
     public static Server SERVER;
     public static GameEvent VOICE_GAME_EVENT;
     public static VoiceChatInteraction INSTANCE;
 
-    @Nullable
+    /** Null until registered with Simple Voice Chat. */
     public static VoiceChatInteractionPlugin voicechatPlugin;
 
     @Override
     public void onEnable() {
+        LOGGER = getLogger();
         SERVER = getServer();
         VOICE_GAME_EVENT = GameEvent.PRIME_FUSE;
         INSTANCE = this;
@@ -46,7 +45,7 @@ public final class VoiceChatInteraction extends JavaPlugin {
             service.registerPlugin(voicechatPlugin);
             LOGGER.info("Successfully registered voicechat_interaction plugin");
         } else {
-            LOGGER.info("Failed to register voicechat_interaction plugin");
+            LOGGER.warning("Failed to register voicechat_interaction plugin");
         }
 
         this.getCommand("voicechat_interaction").setExecutor(new VoiceChatInteractionCommand());

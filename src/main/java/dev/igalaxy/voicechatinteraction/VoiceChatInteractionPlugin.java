@@ -12,7 +12,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
-import javax.annotation.Nullable;
 import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -22,10 +21,9 @@ public class VoiceChatInteractionPlugin implements VoicechatPlugin {
     public static VoicechatApi voicechatApi;
     private static ConcurrentHashMap<UUID, Long> cooldowns;
 
-    @Nullable
+    /** Null until the voice chat server has started. */
     public static VoicechatServerApi voicechatServerApi;
 
-    @Nullable
     private OpusDecoder decoder;
 
     @Override
@@ -73,7 +71,7 @@ public class VoiceChatInteractionPlugin implements VoicechatPlugin {
 
         ServerPlayer player = senderConnection.getPlayer();
         if (!(senderConnection.getPlayer().getPlayer() instanceof Player bukkitPlayer)) {
-            VoiceChatInteraction.LOGGER.warn("Received microphone packet from non-player");
+            VoiceChatInteraction.LOGGER.warning("Received microphone packet from non-player");
             return;
         }
 
